@@ -7,8 +7,8 @@ import SplineScene from '../components/SplineScene.jsx'
 
 <div id="container">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<div class="absolute top-52 left-52 w-[110vw] h-[700px] flex justify-between overflow-visible">
+	<main class="relative">
+		<div class="canva fixed top-0 right-0 w-[500px] h-[600px] flex justify-between overflow-visible">
 			<SplineScene client:load/>
 		</div>
 		<section id="hero">
@@ -19,7 +19,9 @@ import SplineScene from '../components/SplineScene.jsx'
 			<h1 >
 				To get started, open the <code><pre>src/pages</pre></code> directory in your project.
 			</h1>
-			<h1>Ciao, questo è astro</h1>
+			<h1>
+				Ciao, questo è astro
+			</h1>
 			<section id="links">
 				<a class="button" href="https://docs.astro.build">Read our docs</a>
 				<a href="https://astro.build/chat"
@@ -35,7 +37,7 @@ import SplineScene from '../components/SplineScene.jsx'
 			
 		<section class="flex mt-10">
 			<div class="w-1/2">
-				<h1>Ciao, Noi siamo la GO.</h1>
+				<h2>Ciao, Noi siamo la GO.</h2>
 			</div>
 			<div class="w-1/2">
 				<p>
@@ -47,6 +49,10 @@ import SplineScene from '../components/SplineScene.jsx'
 </div>
 
 <style>
+
+	.canva {
+		clip-path: polygon(0 0, 100% 2%, 100% 90%, 0 90%);
+	}
 	#background {
 		position: fixed;
 		top: 0;
@@ -82,6 +88,10 @@ import SplineScene from '../components/SplineScene.jsx'
 	h1 {
 		font-size: 22px;
 		margin-top: 0.25em;
+	}
+
+	h2 {
+		font-size: 50px;
 	}
 
 	#links {
