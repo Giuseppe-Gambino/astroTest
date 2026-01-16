@@ -2,7 +2,10 @@
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar.jsx';
+import SplineScene from '../components/SplineScene.jsx'
+import "../styles/global.css";
 
+import Scene from '../components/Scene'; // Importa il wrapper
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -11,4 +14,12 @@ import Navbar from '../components/navbar.jsx';
 <Layout>
 	<Navbar client:load/>
 	<Welcome />
+	<!-- spline 3d -->
+	<!-- <div class="canva fixed top-0 right-0 w-125 h-150 flex justify-between overflow-visible">
+			<SplineScene client:load/>
+	</div> -->
+    
+	<div class="h-150 w-100 go-3d ">
+    	<Scene client:load />
+  	</div>
 </Layout>
