@@ -6,18 +6,15 @@ export default function Navbar() {
   return (
     <header className="layout-nav relative">
       <nav className={`flex justify-between p-5 ${isOpen && "bg-white pos-100"}`}>
-        <img className={`h-[30px] ${isOpen && "invert"}`} src="/Logo-pulsar.png" alt="logo pulsar" />
+        <h1 className={`font-bold text-3xl ${isOpen && "text-gradient"}`} alt="logo Go">
+          GO.
+        </h1>
 
         <ul className="hidden md:flex gap-5">
           <li href="/home">Home</li>
           <li>Contatti</li>
         </ul>
-        <img
-          className={`md:hidden font-bold text-gray-700 h-[30px] ${isOpen && "invert"}`}
-          src="/menu.png"
-          alt="logo pulsar"
-          onClick={() => setIsOpen(!isOpen)}
-        />
+        <img className={`md:hidden font-bold text-gray-700 h-7.5 ${isOpen && "invert"}`} src="/menu.png" alt="logo pulsar" onClick={() => setIsOpen(!isOpen)} />
       </nav>
       {/* SottoMenu Mobile */}
       <div
