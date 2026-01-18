@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+  }
+
   .layout {
     width: 100vw;
   }
@@ -31,10 +35,6 @@
     padding: 27px;
   }
 
-  .dark * {
-    color: white;
-  }
-
   header {
     position: sticky;
     top: 0;
@@ -49,6 +49,8 @@
   .menu-mobile li,
   .menu-mobile button {
     margin-top: 9px;
+    color: #363636;
+    font-weight: 700;
   }
 
   nav {
@@ -74,7 +76,7 @@
 
   .text-gradient {
     background: -webkit-linear-gradient(-45deg, #b83dd3, #41f4ee);
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -82,8 +84,8 @@
     animation: slideDown 250ms ease-out forwards;
   }
 
-  .invert {
-    filter: invert(1) brightness(100);
+  .ham {
+    filter: brightness(0) invert(1);
   }
 
   #background {
@@ -94,10 +96,6 @@
     height: 100%;
     z-index: -1;
     filter: blur(100px);
-  }
-
-  #container {
-    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
   }
 
   main {

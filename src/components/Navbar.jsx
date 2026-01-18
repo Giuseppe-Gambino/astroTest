@@ -14,7 +14,7 @@ export default function Navbar() {
           <li href="/home">Home</li>
           <li>Contatti</li>
         </ul>
-        <img className={`md:hidden font-bold text-gray-700 h-7.5 ${isOpen && "invert"}`} src="/menu.png" alt="logo pulsar" onClick={() => setIsOpen(!isOpen)} />
+        <img className={`md:hidden font-bold text-gray-700 h-7.5 ${!isOpen && "ham"}`} src="/menu.png" alt="logo pulsar" onClick={() => setIsOpen(!isOpen)} />
       </nav>
       {/* SottoMenu Mobile */}
       <div

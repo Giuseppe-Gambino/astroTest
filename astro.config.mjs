@@ -6,6 +6,10 @@ import react from "@astrojs/react";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      // ✅ Questo dice ad Astro di gestire GSAP correttamente come modulo
+      noExternal: ["gsap"],
+    },
   },
   integrations: [react()],
 });

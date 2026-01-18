@@ -3,6 +3,7 @@ import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar.jsx';
 import SplineScene from '../components/SplineScene.jsx'
+import Footer from '../components/Footer.astro';
 import "../styles/global.css";
 
 import Scene from '../components/Scene'; // Importa il wrapper
@@ -22,4 +23,5 @@ import Scene from '../components/Scene'; // Importa il wrapper
 	<div class="h-150 w-100 go-3d ">
     	<Scene client:load />
   	</div>
+	<Footer />
 </Layout>
