@@ -3,61 +3,78 @@ import { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Registriamo il plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Modello3D() {
   const meshRef = useRef();
+  // Usiamo un ref per tenere traccia dell'animazione di rotazione corrente
+  const rotationTween = useRef(null);
   const { scene } = useGLTF("/Go.glb");
 
   useLayoutEffect(() => {
     if (!meshRef.current) return;
 
-    // 1. ROTAZIONE INFINITA (Sostituisce useFrame)
-    const rotationLoop = gsap.to(meshRef.current.rotation, {
-      y: "+=" + Math.PI * 2, // Ruota di 360 gradi
-      duration: 10,
-      repeat: -1,
-      ease: "none",
-    });
+    // --- FUNZIONE CHE AVVIA LA ROTAZIONE ---
+    // La definiamo qui dentro per poterla riutilizzare
+    const startRotation = () => {
+      // 1. Sicurezza: se c'è già un'animazione attiva, uccidila prima di farne una nuova
+      // Altrimenti si accumulano e il modello girerebbe a velocità 2x, 3x...
+      if (rotationTween.current) rotationTween.current.kill();
 
-    // 2. TIMELINE PER LO SCROLL AL FOOTER
+      // 2. Crea la nuova animazione
+      rotationTween.current = gsap.to(meshRef.current.rotation, {
+        y: "+=" + Math.PI * 2,
+        duration: 10,
+        repeat: -1,
+        ease: "none",
+      });
+    };
+
+    // --- SCROLLTRIGGER ---
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: "footer", // GSAP cerca il tag <footer> nel tuo HTML
-        start: "top bottom", // Inizia quando il footer appare in fondo
-        end: "bottom bottom", // Finisce quando il footer è visibile
-        scrub: 1, // Collega l'animazione allo scroll
-        onEnter: () => rotationLoop.pause(), // Ferma il loop quando arrivi al footer
-        onLeaveBack: () => rotationLoop.play(), // Riprendi il loop se torni su
+        trigger: "footer",
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: 1,
+
+        // Quando entri nel footer, uccidiamo il loop per dare controllo totale allo scroll
+        onEnter: () => {
+          if (rotationTween.current) rotationTween.current.kill();
+        },
+
+        // Quando torni su (esci dal footer tornando verso l'alto), ricreiamo l'animazione!
+        onLeaveBack: () => {
+          startRotation();
+        },
       },
     });
 
-    // Animazione 1: Mette il modello in orizzontale
+    // Animazione Scroll (Footer)
     tl.to(
       meshRef.current.rotation,
       {
         x: 0,
         y: 0,
         z: -1.57,
+        overwrite: true, // Forza sovrascrittura immediata
       },
       0,
-    );
-
-    // Animazione 2: Sposta il contenitore HTML fisso
-    tl.to(
+    ).to(
       ".go-3d",
       {
-        // Calcola: "Tutta la larghezza dello schermo - 36px - la larghezza dell'elemento"
         x: () => (window.innerWidth / 3) * -1,
         duration: 1,
       },
       0,
     );
 
-    // CLEANUP: Fondamentale per evitare che le animazioni si sovrappongano al refresh
+    // --- START INIZIALE ---
+    startRotation();
+
+    // CLEANUP GENERALE
     return () => {
-      rotationLoop.kill();
+      if (rotationTween.current) rotationTween.current.kill();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);

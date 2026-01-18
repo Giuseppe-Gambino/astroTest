@@ -2,11 +2,12 @@
 
 @layer base {
   html {
+    scroll-behavior: smooth;
     font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
   }
 
   .layout {
-    width: 100vw;
+    width: 100%;
   }
 
   .layout > div {
@@ -22,7 +23,7 @@
   }
 
   .layout-nav {
-    width: 100vw;
+    width: 100%;
     max-width: 1300px;
     margin-inline: auto;
     position: sticky;
@@ -113,6 +114,8 @@
     top: 50%;
     left: 50%;
     z-index: -1;
+    width: clamp(180px, 30vw, 400px);
+    height: clamp(400px, 30vw, 600px);
   }
 
   .go-3d::before {
@@ -125,6 +128,7 @@
     left: 50%;
     z-index: -1;
     background: radial-gradient(ellipse, rgba(81, 154, 207, 0.2) 0%, rgba(72, 140, 189, 0.1) 20%, rgba(22, 64, 94, 0) 70%);
+    filter: blur(10px);
   }
 
   body {
