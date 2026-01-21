@@ -9,7 +9,7 @@ export default function Modello3D() {
   const meshRef = useRef();
   // Usiamo un ref per tenere traccia dell'animazione di rotazione corrente
   const rotationTween = useRef(null);
-  const { scene } = useGLTF("/Go.glb");
+  const { scene } = useGLTF("/GoV2.glb");
 
   useLayoutEffect(() => {
     if (!meshRef.current) return;
@@ -82,4 +82,4 @@ export default function Modello3D() {
   return <primitive ref={meshRef} object={scene} scale={1.2} position={[0, 0, 0]} />;
 }
 
-useGLTF.preload("/Go.glb");
+useGLTF.preload("/GoV2.glb");
